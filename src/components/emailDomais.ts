@@ -1,0 +1,23 @@
+export const emailDomains: string[] = [
+  "outlook.com",
+  "hotmail.com",
+  "live.com",
+  "yahoo.com",
+  "icloud.com",
+  "proton.me",
+  "protonmail.com",
+  "tuta.com",
+  "tutanota.com",
+  "mailfence.com",
+  "uol.com.br",
+  "bol.com.br",
+  "terra.com.br",
+  "ig.com.br",
+  "globo.com",
+  "msn.com",
+  "aol.com",
+  "zoho.com",
+  "gmx.com",
+  "yandex.com",
+  "mail.com"
+]
