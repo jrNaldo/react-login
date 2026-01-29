@@ -8,15 +8,17 @@ import Input from "../layout/Input";
 import usePassWord from "../customHooks/togglePassword";
 import ShowError from "../layout/showError";
 import validator from 'validator'
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
     const {register,handleSubmit, formState: {errors}, reset, watch} = useForm<FormType>()
     const {password, tooglePassword} = usePassWord()
     const {theme, toogleTheme} = useContext(ThemeContext)
+    const navigate = useNavigate()
 
-    const onSubmit = (data: FormType) => {
-        alert(`Seja bem vindo, ${data.name}!`)
+    const onSubmit = (d: FormType) => {
         reset()
+        navigate(`/home?name=${d.name}`)
     }
 
     const watchPassword = watch('password')
