@@ -22,13 +22,13 @@ export default function Form() {
         <div 
             className={`
                 ${theme === 'dark' ? 'backdrop-blur-2xl text-white': 'bg-neutral-200 text-black'}  
-                w-[80vw] max-w-200 rounded-2xl p-8  box-border
+                w-[80vw] max-w-200 rounded-2xl p-4 sm:p-8  box-border
             `}
         >
             <form action='' onSubmit={handleSubmit(onSubmit)}>
                 
                 <Container>
-                    <h1 className="text-2xl py-4">Acesse o sistema</h1>
+                    <h1 className="text-xl sm:text-2xl my-4">Acesse o sistema</h1>
 
                     {theme === 'dark' ? 
                         <FaMoon onClick={toogleTheme} className="cursor-pointer"/> : 
