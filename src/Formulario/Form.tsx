@@ -85,7 +85,7 @@ export default function Form() {
                 <Container>
                     <select 
                         id="minhaProfissao" 
-                        className={`grow border rounded-2xl p-2  ${theme === 'dark' ? 'bg-gray-800': 'bg-neutral-200'}`}
+                        className={`grow border rounded-2xl p-2 mt-2  ${theme === 'dark' ? 'bg-gray-800': 'bg-neutral-200'}`}
                         {...register('profession', {validate: (v) => v !== 'select'})}
                         >
                         <option value="select" hidden>Seleciona uma Profissão</option>
