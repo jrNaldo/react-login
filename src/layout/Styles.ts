@@ -1,1 +1,0 @@
-export const buttonStyle = "bg-amber-500 text-white py-2 px-4 rounded border w-full cursor-pointer my-3 hover:bg-white hover:border-amber-500 hover:text-black transition-all"

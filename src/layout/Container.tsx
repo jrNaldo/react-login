@@ -4,7 +4,7 @@ interface ContainerProps {
 
 export default function Container({children}: ContainerProps) {
     return (
-        <div className="flex justify-between items-center gap-2 my-4">
+        <div className="flex justify-between items-center gap-2 mt-4 mb-1 ">
             {children}
         </div>
     )

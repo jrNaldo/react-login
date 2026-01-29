@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { FaCode, FaEye, FaEyeSlash, FaMailBulk, FaMoon, FaSun, FaUser } from "react-icons/fa";
 import Container from "../layout/Container";
-import { buttonStyle } from "../layout/Styles";
 import { ThemeContext } from "../context/ThemeContext";
 import { useForm } from "react-hook-form";
 import type { FormType } from "../types/FormType";
@@ -15,7 +14,7 @@ export default function Form() {
     const {theme, toogleTheme} = useContext(ThemeContext)
 
     const onSubmit = (data: FormType) => {
-        alert(`Seja bem vindo, ${data.name} !`)
+        alert(`Seja bem vindo, ${data.name}!`)
         reset()
     }
 
@@ -69,8 +68,7 @@ export default function Form() {
                     <Input
                         type={password ? 'text': 'password'}
                         placeholder="Senha"
-                        {...register('password', {required: true})}
-                        minLength={8}
+                        {...register('password', {required: true, minLength: 8})}
                         maxLength={15}
                         />
 
@@ -82,14 +80,15 @@ export default function Form() {
                 </Container>
                 
                 {errors?.password?.type === 'required' && <ShowError text='* Obrigatório'/>}
+                {errors?.password?.type === 'minLength' && <ShowError text="A senha deve conter mais de 8 caracteres" />}
 
                 <Container>
                     <select 
                         id="minhaProfissao" 
                         className={`grow border rounded-2xl p-2  ${theme === 'dark' ? 'bg-gray-800': 'bg-neutral-200'}`}
-                        {...register('profession')}
+                        {...register('profession', {validate: (v) => v !== 'select'})}
                         >
-                        <option value="select" disabled hidden>Seleciona uma Profissão</option>
+                        <option value="select" hidden>Seleciona uma Profissão</option>
                         <option value="Desenvolvedor">Desenvolvedor</option>
                         <option value="Engenheiro de software">Engenheiro de software</option>
                         <option value="FullStack">Full-Stack</option>
@@ -98,18 +97,28 @@ export default function Form() {
                     <FaCode></FaCode>
                 </Container>
 
+                {errors?.profession?.type === 'validate' && <ShowError text="Selecione uma profissão"/>}
+
                 <div>
-                    <label className="flex items-center gap-2 text-xs md:text-base">
+                    <label className="flex items-center gap-2 text-xs md:text-base mt-2">
                         <input 
                             type="checkbox" 
-                            className="mt-0.5"
-                            {...register('acceptTerms')}
+                            className="mt-0.5 cursor-pointer"
+                            {...register('acceptTerms', {required: true})}
                         />
                         Eu aceito os termos e condições
                     </label>
                 </div>
+                {errors?.acceptTerms?.type === 'required' && <ShowError text="Concorde com os termos e condições"/>}
 
-                <button className={buttonStyle}>
+                <button 
+                    className={`text-white py-2 px-4 rounded border w-full cursor-pointer my-3 transition-all
+                        ${theme === 'dark' ? 
+                            'bg-amber-500 hover:bg-red-100 hover:text-amber-950 ': 
+                            'bg-amber-900 hover:bg-amber-800'
+                        }
+                    `}
+                >
                     Entrar
                 </button>
             </form>
