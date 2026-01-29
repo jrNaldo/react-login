@@ -22,7 +22,7 @@ export default function Form() {
         <div 
             className={`
                 ${theme === 'dark' ? 'backdrop-blur-2xl text-white': 'bg-neutral-200 text-black'}  
-                w-[80vw] max-w-200 rounded-2xl p-4 sm:p-8  box-border
+                w-[80vw] max-w-200 rounded-2xl p-6 box-border
             `}
         >
             <form action='' onSubmit={handleSubmit(onSubmit)}>

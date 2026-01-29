@@ -7,7 +7,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({name, type, minLength, 
     const {theme} = useContext(ThemeContext)
     
     return <input
-                className={`grow px-3 border rounded-2xl p-1 sm:p-2 ${theme==='dark'?'placeholder:text-white':'placeholder:text-black'}`}
+                className={`grow px-3 border rounded-2xl p-2 sm:p-2 mt-2 text-xs sm:text-sm 
+                    ${theme==='dark'?'placeholder:text-white':'placeholder:text-black'}`}
                 {...rest}
                 placeholder={placeholder}
                 name={name}
