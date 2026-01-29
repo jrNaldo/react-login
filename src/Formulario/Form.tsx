@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { FaCode, FaEye, FaEyeSlash, FaMailBulk, FaMoon, FaSun, FaUser } from "react-icons/fa";
+import { FaCheck, FaCode, FaEye, FaEyeSlash, FaMailBulk, FaMoon, FaSun, FaTimes, FaUser } from "react-icons/fa";
 import Container from "../layout/Container";
 import { ThemeContext } from "../context/ThemeContext";
 import { useForm } from "react-hook-form";
@@ -7,9 +7,10 @@ import type { FormType } from "../types/FormType";
 import Input from "../layout/Input";
 import usePassWord from "../customHooks/togglePassword";
 import ShowError from "../layout/showError";
+import validator from 'validator'
 
 export default function Form() {
-    const {register,handleSubmit, formState: {errors}, reset} = useForm<FormType>()
+    const {register,handleSubmit, formState: {errors}, reset, watch} = useForm<FormType>()
     const {password, tooglePassword} = usePassWord()
     const {theme, toogleTheme} = useContext(ThemeContext)
 
@@ -17,6 +18,9 @@ export default function Form() {
         alert(`Seja bem vindo, ${data.name}!`)
         reset()
     }
+
+    const watchPassword = watch('password')
+    const watchPasswordConfirmation = watch('passwordConfirmation')
 
     return (
         <div 
@@ -55,7 +59,12 @@ export default function Form() {
                     <Input
                         type="email" 
                         placeholder="E-mail"
-                        {...register('email', {required: true})}
+                        {...register('email', 
+                            {
+                                required: true, 
+                                validate: (v) => validator.isEmail(v)
+                            }
+                        )}
                         minLength={8}
                         maxLength={30}
                         />
@@ -63,6 +72,7 @@ export default function Form() {
                 </Container>
 
                 {errors?.email?.type === 'required' && <ShowError text='* Obrigatório'/>}
+                {errors?.email?.type === 'validate' && <ShowError text="Insira um email valido"/>}
 
                 <Container>
                     <Input
@@ -81,6 +91,27 @@ export default function Form() {
                 
                 {errors?.password?.type === 'required' && <ShowError text='* Obrigatório'/>}
                 {errors?.password?.type === 'minLength' && <ShowError text="A senha deve conter mais de 8 caracteres" />}
+                <Container>
+                    <Input
+                        type='password'
+                        placeholder="Digite a senha novamente"
+                        {...register('passwordConfirmation', 
+                            {
+                                required: true
+                            }
+                        )}
+                        minLength={8}
+                        maxLength={15}
+                        />
+
+                        {
+                            watchPasswordConfirmation === watchPassword ? 
+                            <FaCheck className="text-green-400"/> : 
+                            <FaTimes className="text-red-400"/>
+                        }
+
+                </Container>
+                {errors?.passwordConfirmation?.type === 'required' && <ShowError text='* Obrigatório'/>}
 
                 <Container>
                     <select 
